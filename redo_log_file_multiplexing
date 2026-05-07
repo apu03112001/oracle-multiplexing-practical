@@ -1,0 +1,16 @@
+# Redo Log File Multiplexing
+---To multiplex redo log files for better fault tolerance.
+
+## Commands Used
+---sql
+
+SELECT group#, member FROM v$logfile;
+
+ALTER DATABASE ADD LOGFILE MEMBER '/u02/app/oracle/oradata/THRONE/redo01b.log' TO GROUP 1;
+ALTER DATABASE ADD LOGFILE MEMBER '/u02/app/oracle/oradata/THRONE/redo02b.log' TO GROUP 2;
+ALTER DATABASE ADD LOGFILE MEMBER '/u02/app/oracle/oradata/THRONE/redo03b.log' TO GROUP 3;
+
+SELECT group#, member FROM v$logfile;
+
+
+
