@@ -1,0 +1,32 @@
+# Control File Multiplexing
+  ---To create multiple copies of control files for database safety.
+
+## Commands Used
+-login as sys user
+
+SHOW PARAMETER control_files;
+
+SHUTDOWN IMMEDIATE;
+
+-Create New Location(or use any existing path)
+EX : mkdir -p /u02/oradata/THRONE
+
+(copy original controlfile to new location)
+cp /u01/app/oracle/oradata/THRONE/control01.ctl  /u02/oradata/THRONE/control02.ctl
+
+STARTUP NOMOUNT;
+
+ALTER SYSTEM SET control_files=
+'/u01/app/oracle/oradata/THRONE/control01.ctl',
+'/u02/oradata/THRONE/control02.ctl'
+SCOPE=SPFILE;
+
+SHUTDOWN IMMEDIATE;
+
+STARTUP;
+
+SHOW PARAMETER control_files;
+
+STARTUP;
+s
+SHOW PARAMETER control_files;
